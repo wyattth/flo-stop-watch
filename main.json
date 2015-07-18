@@ -1,0 +1,142 @@
+{
+    "properties": {
+        "name": "main",
+        "id": "pro1/main",
+        "project": "pro1",
+        "environment": {
+            "type": "noflo-browser",
+            "content": "<span id=\"pepe\">XXX</span>\n<span id=\"button\">YYY</span>"
+        },
+        "icon": "",
+        "changed": true
+    },
+    "inports": {},
+    "outports": {},
+    "groups": [],
+    "processes": {
+        "Clock Display": {
+            "component": "dom/GetElement",
+            "metadata": {
+                "label": "Clock Display",
+                "x": 792,
+                "y": 324,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "Button": {
+            "component": "dom/GetElement",
+            "metadata": {
+                "label": "Button",
+                "x": 504,
+                "y": 0,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "Click": {
+            "component": "dom/Listen",
+            "metadata": {
+                "label": "Click",
+                "x": 684,
+                "y": 144,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "dom/WriteHtml_w3ok4": {
+            "component": "dom/WriteHtml",
+            "metadata": {
+                "label": "dom/WriteHtml",
+                "x": 1044,
+                "y": 216,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "Current Time": {
+            "component": "core/MakeFunction",
+            "metadata": {
+                "label": "Current Time",
+                "x": 864,
+                "y": 144,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "connections": [
+        {
+            "src": {
+                "process": "Button",
+                "port": "element"
+            },
+            "tgt": {
+                "process": "Click",
+                "port": "element"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "Clock Display",
+                "port": "element"
+            },
+            "tgt": {
+                "process": "dom/WriteHtml_w3ok4",
+                "port": "container"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "Click",
+                "port": "element"
+            },
+            "tgt": {
+                "process": "Current Time",
+                "port": "in"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "Current Time",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "dom/WriteHtml_w3ok4",
+                "port": "html"
+            },
+            "metadata": {}
+        },
+        {
+            "data": "#pepe",
+            "tgt": {
+                "process": "Clock Display",
+                "port": "selector"
+            }
+        },
+        {
+            "data": "#button",
+            "tgt": {
+                "process": "Button",
+                "port": "selector"
+            }
+        },
+        {
+            "data": "click",
+            "tgt": {
+                "process": "Click",
+                "port": "type"
+            }
+        },
+        {
+            "data": "return Date()",
+            "tgt": {
+                "process": "Current Time",
+                "port": "function"
+            }
+        }
+    ]
+}
